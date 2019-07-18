@@ -19,8 +19,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/login', 'AuthController@login')->name('login');
-Route::post('/postLogin', 'AuthController@postLogin');
-Route::get('/logout', 'AuthController@logout');
+Route::group(['middleware' => 'auth'], function(){
+	Route::get('/', function(){
+		if (Auth::user()->role == 'admin') {
+			return view('adminHome');
+		} else{
+			return view('userHome');
+		}
+	});
 
-Route::get('/dashboard', 'AdminController@dashboard');
+	Route::get('/admin', function(){
+		return view('home');
+	})->middleware('auth', 'admin');
+});
+
+
+
