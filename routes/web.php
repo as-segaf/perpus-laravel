@@ -19,18 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'], function(){
-	Route::get('/', function(){
-		if (Auth::user()->role == 'admin') {
-			return view('adminHome');
-		} else{
-			return view('userHome');
-		}
-	});
+Route::group(['middleware' => ['auth','checkRole:admin']], function(){
+	Route::view('/admin','adminHome');
+});
 
-	Route::get('/admin', function(){
-		return view('home');
-	})->middleware('auth', 'admin');
+Route::group(['middleware' => ['auth', 'checkRole:admin,user']], function(){
+	Route::view('/user','userHome');
 });
 
 
