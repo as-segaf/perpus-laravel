@@ -19,8 +19,8 @@ class User extends Authenticatable
         'name', 'email', 'password', 'role'
     ];
 
-    protected $guarded = [
-        'role'];
+    // protected $guarded = [
+    //     'role'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -30,6 +30,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * get the role
+     *
+     *
+     */
+    public function isRole(){
+        return $this->role;
+    }
 
     /**
      * The attributes that should be cast to native types.
