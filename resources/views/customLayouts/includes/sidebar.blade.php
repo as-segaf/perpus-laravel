@@ -8,7 +8,7 @@
           <img src="{{ url('assets/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{ Auth::user()->name }}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -31,11 +31,13 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="active treeview">
-          <a href="/member">
-            <i class="fa fa-group"></i> <span>Members</span>
-          </a>
-        </li>
+        @if ( Auth::user()->role == 'admin')
+          <li class="active treeview">
+            <a href="/member">
+              <i class="fa fa-group"></i> <span>Members</span>
+            </a>
+          </li>
+        @endif
         <li class="active treeview">
           <a href="/library">
             <i class="fa fa-book"></i> <span>Library</span>

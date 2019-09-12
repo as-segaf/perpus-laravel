@@ -19,8 +19,7 @@
                 <img src="{{ url('assets/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{ Auth::user()->name }}
                 </p>
               </li>
               <!-- Menu Body -->
@@ -44,7 +43,10 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <form method="post" action="{{ route('logout')}}">
+                    @csrf
+                    <button type="submit" class="btn btn-default btn-flat">Sign out</button>
+                  </form>
                 </div>
               </li>
             </ul>

@@ -23,12 +23,11 @@ Auth::routes();
 
 
 Route::group(['middleware' => ['auth','checkRole:admin']], function(){
-	// Route::view('/admin','adminHome');
-	Route::view ('/admin/dashboard', 'adminHome');
+	Route::get('/admin','AdminController@index');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:admin,user']], function(){
-	Route::view('/user','userHome');
+	Route::get('/user','UserController@index');
 });
 
 
